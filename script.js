@@ -1,6 +1,19 @@
 
 function MakeSuperSecretCodeWriter() {
 
+
+  function grounds(shuffleFactor) {
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*()\'";:/?.,';
+    let i;
+    for (i = 0; i < shuffleFactor; i++) {
+      chars = chars.split('').sort((a, b) => Math.random() > 0.5 ? 1 : -1).join('')
+    }
+    return chars
+  }
+
+  const chars = grounds(10);
+
+
   const alpha = [
     ['a', '!', 'b', 'c', 'd', 'e', 'f', 'g'],
     ['h', 'i', 'j', 'k', '?', 'l', 'm', 'n', 'o', 'p'],
@@ -9,10 +22,6 @@ function MakeSuperSecretCodeWriter() {
     ['w', ',', 'x'],
     ['y', 'z'],
   ];
-
-  function base() {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*()\'";:/?.,';
-  }
 
   function encode(str) {
     const encodedString = str.split('').reduce((accum, char) => {
@@ -56,11 +65,16 @@ function MakeSuperSecretCodeWriter() {
 
 }
 
-// const coder = MakeSuperSecretCodeWriter();
+const coder = MakeSuperSecretCodeWriter();
 
-// const codeStr = coder.encode('Hi how are you?');
+const codeStr = coder.encode('Hello Caroline. Ba ba ba. How are you?');
 
-// console.log(codeStr);
+
+// console.log('\n', 'Coded String = ', codeStr, '\n');
+
+const decodedStr = coder.decode('1005151518 030021181511170533 0200 0200 020033 101840 002105 50183114')
+
+console.log(decodedStr)
 
 
 // const decodedStr = coder.decode(codeStr);
